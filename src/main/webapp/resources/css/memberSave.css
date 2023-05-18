@@ -1,0 +1,21 @@
+#section {
+    width: 70%;
+    margin: 50px auto;
+}
+h3 {
+    margin-bottom: 30px;
+}
+label {
+    display: block;
+    margin-top: 10px;
+}
+#emailSign {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+#sign-up {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    width: 100%;
+}

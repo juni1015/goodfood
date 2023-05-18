@@ -1,0 +1,12 @@
+.navbar-extra-padding {
+    /*padding-left: 6rem;*/
+    /*padding-right: 6rem;*/
+}
+.navbar-extra-width {
+    width: 80%;
+}
+
+.footer-extra-width {
+    width: 80%;
+    margin: 0 auto;
+}
