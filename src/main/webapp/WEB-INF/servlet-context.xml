@@ -12,6 +12,8 @@
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <resources mapping="/resources/**" location="/resources/"/>
+    <!-- location에 있는 경로의 접근을 스프링 설정으로 mapping의 명칭으로 화면에서 접근하겠다-->
+    <resources mapping="/upload/**" location="file:///D:/goodfood_img/"/>
 
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

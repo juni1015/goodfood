@@ -1,0 +1,20 @@
+package com.icia.goodfood.repository;
+
+import com.icia.goodfood.dto.MemberDTO;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class MemberRepository {
+    @Autowired
+    private SqlSessionTemplate sql;
+
+    public MemberDTO emailCheck(String memberEmailFull) {
+        return sql.selectOne("Member.emailCheck", memberEmailFull);
+    }
+
+    public MemberDTO nicknameCheck(String memberNickname) {
+        return sql.selectOne("Member.nicknameCheck", memberNickname);
+    }
+}
