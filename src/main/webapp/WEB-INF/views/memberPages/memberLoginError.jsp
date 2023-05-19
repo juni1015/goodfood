@@ -10,7 +10,7 @@
 <head>
   <title>Title</title>
   <script>
-    alert("이메일 혹은 비밀번호가 틀렸습니다. 다시 입력");
+    alert("이메일 혹은 비밀번호가 틀렸습니다. 다시 입력하세요");
     location.href = "/member/login";
   </script>
 </head>

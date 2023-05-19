@@ -87,5 +87,22 @@ public class MemberController {
         return "memberPages/memberMyPage";
     }
 
+    @GetMapping("/withdrawal")
+    public String withdrawalForm(HttpSession session, Model model) {
+        // 세션에 들어있는 로그인된 id 가져오기
+        Long loginId = (Long) session.getAttribute("loginId");
+        MemberDTO memberDTO = memberService.findById(loginId);
+        model.addAttribute("member", memberDTO);
+        return "memberPages/memberWithdrawal";
+    }
+
+    @PostMapping("/withdrawal")
+    public String withdrawal(HttpSession session) {
+        // 세션에 들어있는 로그인된 id 가져오기
+        Long loginId = (Long) session.getAttribute("loginId");
+        memberService.delete(loginId);
+        return "redirect:/member/logout";
+    }
+
 
 }

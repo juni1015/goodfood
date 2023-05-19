@@ -33,6 +33,10 @@
     <select id="findProfile" parameterType="Long" resultType="memberProfile">
         select * from goodfood_memberProfile_table where memberId = #{memberId}
     </select>
+
+    <delete id="delete" parameterType="Long">
+        delete from goodfood_member_table where id = #{id}
+    </delete>
 </mapper>
 
 

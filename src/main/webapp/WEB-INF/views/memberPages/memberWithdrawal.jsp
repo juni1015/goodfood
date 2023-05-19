@@ -20,34 +20,28 @@
 <%@include file="../component/nav.jsp"%>
 <div id="section">
   <h3>로그인</h3>
-  <form action="/member/login" method="post" onsubmit="return login_check()">
-    <div class="mb-3">
-      <label for="email-full" class="form-label">이메일</label>
-      <input type="email" class="form-control" id="email-full" name="memberEmailFull" placeholder="이메일과 도메인 입력">
-    </div>
+  <form action="/member/withdrawal" method="post" onsubmit="return password_check()">
     <div class="mb-3">
       <label for="password" class="form-label">비밀번호</label>
-      <input type="password" class="form-control" id="password" name="memberPassword" placeholder="비밀번호 입력">
+      <input type="password" class="form-control" id="password" placeholder="비밀번호 입력">
     </div>
-    <button type="submit" class="btn btn-primary" id="sign-in">로그인</button>
+    <button type="submit" class="btn btn-primary" id="password-check">비밀번호 확인</button>
   </form>
 </div>
 <%@include file="../component/footer.jsp"%>
 </body>
 <script>
-  // 로그인 전 아이디, 비밀번호 작성했는지 체크
-  const login_check = () => {
-    const emailFull = document.getElementById("email");
+  // 로그인한 회원 비밀번호와 입력한 비밀번호가 같은지 확인
+  const password_check = () => {
     const password = document.getElementById("password");
-    if (emailFull.value == "") {
-      alert("이메일을 입력하세요");
-      emailFull.focus();
-      return false;
-    } else if (password.value == "") {
-      alert("비밀번호를 입력하세요");
+    const loginPassword = '${member.memberPassword}';
+    if (password.value != loginPassword) {
+      alert("비밀번호가 틀렸습니다. 다시 입력하세요");
+      password.value = "";
       password.focus();
       return false;
     } else {
+      alert("탈퇴 완료");
       return true;
     }
   }
