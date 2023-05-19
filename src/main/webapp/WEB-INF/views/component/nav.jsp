@@ -25,7 +25,7 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li>
-          <a href="#" class="d-flex nav-link">sign in</a>
+          <a href="/member/login" class="d-flex nav-link">sign in</a>
         </li>
         <li>
           <a href="/member/save" class="d-flex nav-link">sign up</a>

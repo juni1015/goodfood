@@ -12,6 +12,19 @@
         select * from goodfood_member_table where memberNickname = #{memberNickname}
     </select>
 
+    <insert id="save" parameterType="member" useGeneratedKeys="true" keyProperty="id">
+        insert into goodfood_member_table(memberEmail, memberDomain, memberEmailFull, memberPassword, memberName, memberNickname, memberMobileAgency, memberMobile, profileAttached)
+        values (#{memberEmail}, #{memberDomain}, #{memberEmailFull}, #{memberPassword}, #{memberName}, #{memberNickname}, #{memberMobileAgency}, #{memberMobile}, #{profileAttached})
+    </insert>
+
+    <insert id="saveProfile" parameterType="memberProfile">
+        insert into goodfood_memberProfile_table(originalFileName, storedFileName, memberId)
+        values (#{originalFileName}, #{storedFileName}, #{memberId})
+    </insert>
+
+    <select id="login" parameterType="member" resultType="member">
+        select * from goodfood_member_table where memberEmailFull = #{memberEmailFull} and memberPassword = #{memberPassword}
+    </select>
 </mapper>
 
 

@@ -25,13 +25,13 @@
       <label for="email" class="form-label">이메일</label>
       <div class="row">
         <div class="col-4">
-          <input type="email" class="form-control" id="email" name="memberEmail" placeholder="이메일 입력" onblur="email_check()">
+          <input type="text" class="form-control" id="email" name="memberEmail" placeholder="이메일 입력" onblur="email_check()">
         </div>
         <div class="col-1">
           <p id="emailSign">@</p>
         </div>
         <div class="col-4">
-          <input type="email" class="form-control" id="domain" name="memberDomain" placeholder="도메인 입력" onblur="email_check()">
+          <input type="text" class="form-control" id="domain" name="memberDomain" placeholder="도메인 입력" onblur="email_check()">
         </div>
         <div class="col-3">
           <select id="domain-select" class="form-select" onchange="domain_select()">
@@ -191,10 +191,11 @@
     if (password == "") {
       passwordConfirmResult.innerHTML = "비밀번호 입력필요";
       passwordConfirmResult.style.color = "red";
-      return false;
+      return true;
     } else if (password == passwordConfirm) {
       passwordConfirmResult.innerHTML = "일치";
       passwordConfirmResult.style.color = "green";
+      return false;
     } else {
       passwordConfirmResult.innerHTML = "불일치";
       passwordConfirmResult.style.color = "red";
@@ -214,9 +215,11 @@
     } else if (name.match(exp)) {
       nameResult.innerHTML = "";
       nameResult.style.color = "green";
+      return false;
     } else {
       nameResult.innerHTML = "영문과 한글만 사용 가능합니다.";
       nameResult.style.color = "red";
+      return true;
     }
   }
 
@@ -241,6 +244,51 @@
     const domainResult = document.getElementById("domain");
     domainResult.value = domain.value;
     email_check()
+  }
+
+  const save_check = () => {
+    const email = document.getElementById("email");
+    const domain = document.getElementById("domain");
+    const password = document.getElementById("password");
+    const passwordConfirm = document.getElementById("confirm-password");
+    const name = document.getElementById("name");
+    const nickname = document.getElementById("nickname");
+    const mobile = document.getElementById("mobile");
+    if (!email_check()) {
+      if (email.value == "") {
+        alert("이메일을 확인하십시오");
+        email.focus();
+      } else if (domain.value == "") {
+        alert("도메인을 확인하십시오");
+        domain.focus();
+      } else {
+        alert("중복된 이메일입니다.");
+        email.focus();
+      }
+      return false;
+    } else if (password_check()) {
+      alert("비밀번호을 확인하십시오");
+      password.focus();
+      return false;
+    } else if (password_confirm()) {
+      alert("비밀번호 확인을 확인하십시오");
+      passwordConfirm.focus();
+      return false;
+    } else if (name_check()) {
+      alert("이름을 확인하십시오");
+      name.focus();
+      return false;
+    } else if (!nickname_check()) {
+      alert("닉네임을 확인하십시오");
+      nickname.focus();
+      return false;
+    } else if (mobile_check()) {
+      alert("모바일 번호를 확인하십시오");
+      mobile.focus();
+      return false;
+    } else {
+      return true;
+    }
   }
 </script>
 </html>
