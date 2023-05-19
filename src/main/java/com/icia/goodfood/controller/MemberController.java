@@ -1,11 +1,13 @@
 package com.icia.goodfood.controller;
 
 import com.icia.goodfood.dto.MemberDTO;
+import com.icia.goodfood.dto.MemberProfileDTO;
 import com.icia.goodfood.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -64,4 +66,26 @@ public class MemberController {
             return "memberPages/memberLoginError";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        // 세션에 담긴 값 전체 삭제
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage(HttpSession session, Model model) {
+        // 세션에 들어있는 로그인된 id 가져오기
+        Long loginId = (Long) session.getAttribute("loginId");
+        MemberDTO memberDTO = memberService.findById(loginId);
+        model.addAttribute("member", memberDTO);
+        if (memberDTO.getProfileAttached() == 1) {
+            MemberProfileDTO memberProfileDTO = memberService.findProfile(loginId);
+            model.addAttribute("memberProfile", memberProfileDTO);
+        }
+        return "memberPages/memberMyPage";
+    }
+
+
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
 
@@ -24,12 +25,22 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li>
-          <a href="/member/login" class="d-flex nav-link">sign in</a>
-        </li>
-        <li>
-          <a href="/member/save" class="d-flex nav-link">sign up</a>
-        </li>
+        <c:if test="${sessionScope.loginEmailFull == null}">
+          <li>
+            <a href="/member/login" class="d-flex nav-link">sign in</a>
+          </li>
+          <li>
+            <a href="/member/save" class="d-flex nav-link">sign up</a>
+          </li>
+        </c:if>
+        <c:if test="${sessionScope.loginEmailFull.length() > 0}">
+          <li>
+            <a href="/member/mypage" class="d-flex nav-link">mypage</a>
+          </li>
+          <li>
+            <a href="/member/logout" class="d-flex nav-link">logout</a>
+          </li>
+        </c:if>
       </ul>
       <form class="d-flex mt-3" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

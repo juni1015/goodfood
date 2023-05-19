@@ -14,7 +14,7 @@ label {
     justify-content: center;
     padding-top: 5px;
 }
-#sign-up {
+#sign-up, #sign-in {
     margin-top: 15px;
     margin-bottom: 25px;
     width: 100%;

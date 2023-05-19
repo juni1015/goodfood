@@ -25,6 +25,14 @@
     <select id="login" parameterType="member" resultType="member">
         select * from goodfood_member_table where memberEmailFull = #{memberEmailFull} and memberPassword = #{memberPassword}
     </select>
+
+    <select id="findById" parameterType="Long" resultType="member">
+        select * from goodfood_member_table where id = #{id}
+    </select>
+
+    <select id="findProfile" parameterType="Long" resultType="memberProfile">
+        select * from goodfood_memberProfile_table where memberId = #{memberId}
+    </select>
 </mapper>
 
 

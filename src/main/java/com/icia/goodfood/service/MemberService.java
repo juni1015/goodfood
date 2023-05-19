@@ -51,4 +51,12 @@ public class MemberService {
     public MemberDTO login(MemberDTO memberDTO) {
         return memberRepository.login(memberDTO);
     }
+
+    public MemberDTO findById(Long loginId) {
+        return memberRepository.findById(loginId);
+    }
+
+    public MemberProfileDTO findProfile(Long loginId) {
+        return memberRepository.findProfile(loginId);
+    }
 }
