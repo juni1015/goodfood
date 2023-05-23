@@ -19,7 +19,7 @@
 <body>
 <%@include file="../component/nav.jsp"%>
 <div id="section">
-  <h3>로그인</h3>
+  <h3>비밀번호 확인</h3>
   <form action="/member/withdrawal" method="post" onsubmit="return password_check()">
     <div class="mb-3">
       <label for="password" class="form-label">비밀번호</label>

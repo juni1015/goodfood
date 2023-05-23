@@ -87,6 +87,26 @@ public class MemberController {
         return "memberPages/memberMyPage";
     }
 
+    @GetMapping("/update")
+    public String updateForm(HttpSession session, Model model) {
+        // 세션에 들어있는 로그인된 id 가져오기
+        Long loginId = (Long) session.getAttribute("loginId");
+        MemberDTO memberDTO = memberService.findById(loginId);
+        model.addAttribute("member", memberDTO);
+//        if (memberDTO.getProfileAttached() == 1) {
+//            MemberProfileDTO memberProfileDTO = memberService.findProfile(loginId);
+//            model.addAttribute("memberProfile", memberProfileDTO);
+//        }
+        return "memberPages/memberUpdate";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO) {
+        System.out.println("memberDTO = " + memberDTO);
+        memberService.update(memberDTO);
+        return "redirect:/member/mypage";
+    }
+
     @GetMapping("/withdrawal")
     public String withdrawalForm(HttpSession session, Model model) {
         // 세션에 들어있는 로그인된 id 가져오기

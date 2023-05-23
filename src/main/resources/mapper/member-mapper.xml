@@ -34,6 +34,11 @@
         select * from goodfood_memberProfile_table where memberId = #{memberId}
     </select>
 
+    <update id="update" parameterType="member">
+        update goodfood_member_table set memberPassword = #{memberPassword}, memberName = #{memberName}, memberNickname = #{memberNickname}, memberMobileAgency = #{memberMobileAgency}, memberMobile = #{memberMobile}
+        where id = #{id}
+    </update>
+
     <delete id="delete" parameterType="Long">
         delete from goodfood_member_table where id = #{id}
     </delete>

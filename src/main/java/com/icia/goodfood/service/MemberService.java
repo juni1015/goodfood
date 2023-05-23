@@ -60,7 +60,12 @@ public class MemberService {
         return memberRepository.findProfile(loginId);
     }
 
+    public void update(MemberDTO memberDTO) {
+        memberRepository.update(memberDTO);
+    }
+
     public void delete(Long loginId) {
         memberRepository.delete(loginId);
     }
+
 }
