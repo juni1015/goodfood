@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Board">
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="board">
+        select * from goodfood_board_table order by id desc limit #{start}, #{limit}
+    </select>
+
+    <select id="count" resultType="Integer">
+        select count(id) from goodfood_board_table
+    </select>
+
+    <select id="searchList" parameterType="java.util.HashMap" resultType="board">
+        select * from goodfood_board_table
+                 where boardStoreName like concat('%', #{q}, '%') or
+                       boardStoreAddress like concat('%', #{q}, '%') or
+                       boardStoreKind like concat('%', #{q}, '%')
+                 order by id desc limit #{start}, #{limit}
+    </select>
+
+    <select id="searchCount" parameterType="String" resultType="Integer">
+        select count(id) from goodfood_board_table
+                         where boardStoreName like concat('%', #{q}, '%') or
+                               boardStoreAddress like concat('%', #{q}, '%') or
+                               boardStoreKind like concat('%', #{q}, '%')
+    </select>
+
+    <select id="categoryList" parameterType="java.util.HashMap" resultType="board">
+        select * from goodfood_board_table where boardCategory = #{boardCategory}
+        order by id desc limit #{start}, #{limit}
+    </select>
+
+    <select id="categoryCount" parameterType="Integer" resultType="Integer">
+        select count(id) from goodfood_board_table where boardCategory = #{boardCategory}
+    </select>
+
+    <select id="categorySearchList" parameterType="java.util.HashMap" resultType="board">
+        select * from goodfood_board_table
+                where boardCategory = #{boardCategory} and
+                      (boardStoreName like concat('%', #{q}, '%') or
+                       boardStoreAddress like concat('%', #{q}, '%') or
+                       boardStoreKind like concat('%', #{q}, '%'))
+                order by id desc limit #{start}, #{limit}
+    </select>
+
+    <select id="categorySearchCount" parameterType="java.util.HashMap" resultType="Integer">
+        select count(id) from goodfood_board_table
+                         where boardCategory = #{boardCategory} and
+                               (boardStoreName like concat('%', #{q}, '%') or
+                                boardStoreAddress like concat('%', #{q}, '%') or
+                                boardStoreKind like concat('%', #{q}, '%'))
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
