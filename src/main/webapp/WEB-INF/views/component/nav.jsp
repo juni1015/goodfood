@@ -23,6 +23,11 @@
         <li class="nav-item">
           <a class="nav-link" href="#">question</a>
         </li>
+        <c:if test="${sessionScope.loginEmailFull == 'admin@admin.com'}">
+          <li class="nav-item">
+            <a class="nav-link" href="/board/save">작성</a>
+          </li>
+        </c:if>
       </ul>
       <ul class="navbar-nav ml-auto">
         <c:if test="${sessionScope.loginEmailFull == null}">

@@ -53,6 +53,21 @@
                                 boardStoreKind like concat('%', #{q}, '%'))
     </select>
 
+    <select id="doubleCheck" parameterType="board" resultType="board">
+        select * from goodfood_board_table
+                 where boardStoreName = #{boardStoreName} and boardStoreAddress = #{boardStoreAddress}
+    </select>
+
+    <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
+        insert into goodfood_board_table(boardCategory, boardStoreName, boardStoreAddress, boardStoreKind, boardStoreNumber, boardStoreTime, boardStoreHomepage, FileAttached, memberId)
+        values (#{boardCategory}, #{boardStoreName}, #{boardStoreAddress}, #{boardStoreKind}, #{boardStoreNumber}, #{boardStoreTime}, #{boardStoreHomepage}, #{FileAttached}, #{memberId})
+    </insert>
+
+    <insert id="saveFile" parameterType="boardFile">
+        insert into goodfood_boardfile_table(originalFileName, storedFileName, boardId)
+        values (#{originalFileName}, #{storedFileName}, #{boardId})
+    </insert>
+
 </mapper>
 
 

@@ -1,6 +1,7 @@
 package com.icia.goodfood.repository;
 
 import com.icia.goodfood.dto.BoardDTO;
+import com.icia.goodfood.dto.BoardFileDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,5 +42,18 @@ public class BoardRepository {
 
     public int categorySearchCount(Map<String, Object> pagingParams) {
         return sql.selectOne("Board.categorySearchCount", pagingParams);
+    }
+
+    public BoardDTO doubleCheck(BoardDTO boardDTO) {
+        return sql.selectOne("Board.doubleCheck", boardDTO);
+    }
+
+    public BoardDTO save(BoardDTO boardDTO) {
+        sql.insert("Board.save", boardDTO);
+        return boardDTO;
+    }
+
+    public void saveFile(BoardFileDTO boardFileDTO) {
+        sql.insert("Board.saveFile", boardFileDTO);
     }
 }

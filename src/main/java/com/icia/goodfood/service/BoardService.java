@@ -1,11 +1,12 @@
 package com.icia.goodfood.service;
 
-import com.icia.goodfood.dto.BoardDTO;
-import com.icia.goodfood.dto.PageDTO;
+import com.icia.goodfood.dto.*;
 import com.icia.goodfood.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,5 +134,35 @@ public class BoardService {
             pageDTO.setEndPage(pageDTO.getMaxPage());
         }
         return pageDTO;
+    }
+
+    public BoardDTO doubleCheck(BoardDTO boardDTO) {
+        return boardRepository.doubleCheck(boardDTO);
+    }
+
+    public void save(BoardDTO boardDTO) throws IOException {
+        if (boardDTO.getBoardFile().isEmpty()) {
+            System.out.println("파일없음");
+            boardDTO.setFileAttached(0);
+            boardRepository.save(boardDTO);
+        } else {
+            System.out.println("파일있음");
+            boardDTO.setFileAttached(1);
+            BoardDTO dto = boardRepository.save(boardDTO);
+            // 저장한 member의 id에 저장된 profile의 원본 파일명 (memberProfile 테이블에 memberId 값을 담기 위해)
+            String originalProfileName = dto.getBoardFile().getOriginalFilename();
+            // 서버용 파일명
+            String storeProfileName = System.currentTimeMillis() + "-" + originalProfileName;
+            // 저장할 MemberProfileDTO 셋팅
+            BoardFileDTO boardFileDTO = new BoardFileDTO();
+            boardFileDTO.setOriginalFileName(originalProfileName);
+            boardFileDTO.setStoredFileName(storeProfileName);
+            boardFileDTO.setBoardId(dto.getId());
+            // 로컬에 파일을 저장할 경로 설정 (폴더 경로 + 저장할 이름)
+            String savePath = "D:\\goodfood_img\\" + storeProfileName;
+            // profile 저장 처리
+            dto.getBoardFile().transferTo(new File(savePath));
+            boardRepository.saveFile(boardFileDTO);
+        }
     }
 }

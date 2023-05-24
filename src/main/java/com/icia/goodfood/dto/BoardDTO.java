@@ -26,5 +26,6 @@ public class BoardDTO {
     private int boardStoreUnlike;
     private int FileAttached;
     private Long memberId;
-    private List<MultipartFile> boardFile;  //위에서 list로 타입을 바꿔주면 여러개의 파일 값 저장 가능
+    private MultipartFile boardFile;
+//    private List<MultipartFile> boardFile;  //위에서 list로 타입을 바꿔주면 여러개의 파일 값 저장 가능
 }
