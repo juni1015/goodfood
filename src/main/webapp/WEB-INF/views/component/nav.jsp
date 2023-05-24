@@ -12,13 +12,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">food</a>
+          <a class="nav-link" href="/board/list?boardCategory=1">food</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">cafe</a>
+          <a class="nav-link" href="/board/list?boardCategory=2">cafe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Alcohol</a>
+          <a class="nav-link" href="/board/list?boardCategory=3">Alcohol</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">question</a>
@@ -42,8 +42,8 @@
           </li>
         </c:if>
       </ul>
-      <form class="d-flex mt-3" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex mt-3" role="search" action="/board/list" method="get">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
         <button class="btn btn-outline-primary" type="submit">Search</button>
       </form>
     </div>
