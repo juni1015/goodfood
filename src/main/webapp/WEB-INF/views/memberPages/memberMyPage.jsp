@@ -43,8 +43,7 @@
     <c:if test="${member.profileAttached == 1}">
         <div class="rounded-circle">
                 <%--               src="${pageContext.request.contextPath} : 현재 돌고있는 서버에 접근한다--%>
-            <img src="${pageContext.request.contextPath}/upload/${memberProfile.storedFileName}" alt="" width="300"
-                 height="300">
+            <img src="${pageContext.request.contextPath}/upload/${memberProfile.storedFileName}" alt="" width="300" height="300">
         </div>
     </c:if>
     <div class="mb-3">

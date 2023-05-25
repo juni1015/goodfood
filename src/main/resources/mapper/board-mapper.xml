@@ -68,6 +68,18 @@
         values (#{originalFileName}, #{storedFileName}, #{boardId})
     </insert>
 
+    <update id="boardHitsUp" parameterType="Long">
+        update goodfood_board_table set boardStoreHits = boardStoreHits + 1 where id = #{id}
+    </update>
+
+    <select id="findById" parameterType="Long" resultType="board">
+        select * from goodfood_board_table where id = #{id}
+    </select>
+
+    <select id="findFile" parameterType="Long" resultType="boardFile">
+        select * from goodfood_boardfile_table where boardId = #{boardId}
+    </select>
+
 </mapper>
 
 

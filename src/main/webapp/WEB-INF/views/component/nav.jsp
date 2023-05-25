@@ -3,7 +3,7 @@
 <style>
 
 </style>
-<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-extra-padding">
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-extra-padding" id="nav">
   <div class="container-fluid navbar-extra-width">
     <a class="navbar-brand" href="/">goodfood</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

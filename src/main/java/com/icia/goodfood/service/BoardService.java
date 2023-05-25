@@ -169,4 +169,16 @@ public class BoardService {
     public void dataSetting(BoardDTO boardDTO) {
         boardRepository.save(boardDTO);
     }
+
+    public void boardHitsUp(Long id) {
+        boardRepository.boardHitsUp(id);
+    }
+
+    public BoardDTO findById(Long id) {
+        return boardRepository.findById(id);
+    }
+
+    public BoardFileDTO findFile(Long id) {
+        return boardRepository.findFile(id);
+    }
 }

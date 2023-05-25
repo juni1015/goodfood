@@ -13,10 +13,34 @@
     <link rel="stylesheet" href="/resources/css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <style>
+        #name-link {
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        #name-link:hover {
+            color: #0d6efd;
+        }
+    </style>
 </head>
 <body>
 <%@include file="../component/nav.jsp"%>
 <div id="section">
+    <c:choose>
+        <c:when test="${boardCategory == 1}">
+            <h3>food</h3>
+        </c:when>
+        <c:when test="${boardCategory == 2}">
+            <h3>cafe</h3>
+        </c:when>
+        <c:when test="${boardCategory == 3}">
+            <h3>Alcohol</h3>
+        </c:when>
+        <c:otherwise>
+            <h3>All</h3>
+        </c:otherwise>
+    </c:choose>
     <!-- 검색 -->
     <c:if test="${boardCategory != 0}">
         <div id="search-area" class="container">
@@ -43,7 +67,7 @@
             </tr>
             <c:forEach items="${boardList}" var="board">
                 <tr>
-                    <td>${board.boardStoreName}</td>
+                    <td><a href="/board/detail?id=${board.id}&boardCategory=${boardCategory}&page=${paging.page}&q=${q}" id="name-link">${board.boardStoreName}</a></td>
                     <td>${board.boardStoreKind}</td>
                     <td>${board.boardStoreAddress}</td>
                     <td>${board.boardStoreHits}</td>

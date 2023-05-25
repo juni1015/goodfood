@@ -1,9 +1,6 @@
 package com.icia.goodfood.controller;
 
-import com.icia.goodfood.dto.BoardDTO;
-import com.icia.goodfood.dto.BoardPageDTO;
-import com.icia.goodfood.dto.MemberDTO;
-import com.icia.goodfood.dto.PageDTO;
+import com.icia.goodfood.dto.*;
 import com.icia.goodfood.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -93,5 +90,25 @@ public class BoardController {
             boardService.dataSetting(boardDTO);
         }
         return "redirect:/board/list?boardCategory=" + boardCategory;
+    }
+
+    @GetMapping("/detail")
+    public String findById(@RequestParam("id") Long id,
+                           @RequestParam(value = "boardCategory", required = false, defaultValue = "0") int boardCategory,
+                           @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                           @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                           Model model) {
+        boardService.boardHitsUp(id);
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        model.addAttribute("boardCategory", boardCategory);
+        model.addAttribute("page", page);
+        model.addAttribute("q", q);
+        //파일 있으면 찾아오기
+        if (boardDTO.getFileAttached() == 1) {
+            BoardFileDTO boardFileDTO = boardService.findFile(id);
+            model.addAttribute("boardFile", boardFileDTO);
+        }
+        return "boardPages/boardDetail";
     }
 }
