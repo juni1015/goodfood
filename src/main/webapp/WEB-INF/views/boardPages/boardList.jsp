@@ -27,11 +27,13 @@
             </form>
         </div>
     </c:if>
+    <c:if test="${sessionScope.loginEmailFull == 'admin@admin.com'}">
+        <a href="/board/data?boardCategory=${boardCategory}">데이터</a>
+    </c:if>
     <!-- 조회된 글 리스트 -->
     <div class="container" id="list">
-        <table class="table table-success table-striped">
+        <table class="table table-hover">
             <tr>
-                <th>no</th>
                 <th>이름</th>
                 <th>종류</th>
                 <th>주소</th>
@@ -41,7 +43,6 @@
             </tr>
             <c:forEach items="${boardList}" var="board">
                 <tr>
-                    <td>${board.id}</td>
                     <td>${board.boardStoreName}</td>
                     <td>${board.boardStoreKind}</td>
                     <td>${board.boardStoreAddress}</td>

@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 public class BoardDTO {
     private Long id;
-    private String boardCategory;
+    private int boardCategory;
     private String boardStoreName;
     private String boardStoreAddress;
     private String boardStoreKind;

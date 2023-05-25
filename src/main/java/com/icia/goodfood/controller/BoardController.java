@@ -75,4 +75,23 @@ public class BoardController {
         boardService.save(boardDTO);
         return "redirect:/board/list?boardCategory=" + boardDTO.getBoardCategory();
     }
+
+    @GetMapping("/data")
+    public String dataSetting(HttpSession session, @RequestParam("boardCategory") int boardCategory) {
+        for (int i = 1; i < 55; i++) {
+            BoardDTO boardDTO = new BoardDTO();
+            // 세션에 들어있는 로그인된 id 가져와서 boardDTO에 담기
+            Long loginId = (Long) session.getAttribute("loginId");
+            boardDTO.setMemberId(loginId);
+            boardDTO.setBoardCategory(boardCategory);
+            boardDTO.setBoardStoreName(boardCategory + "StoreName" + i);
+            boardDTO.setBoardStoreAddress(boardCategory + "StoreAddress" + i);
+            boardDTO.setBoardStoreKind(boardCategory + "StoreKind" + i);
+            boardDTO.setBoardStoreNumber(boardCategory + "010-0000-0000");
+            boardDTO.setBoardStoreTime("9 AM - 5 PM");
+            boardDTO.setBoardStoreHomepage("https://www.dummystore" + i + ".com");
+            boardService.dataSetting(boardDTO);
+        }
+        return "redirect:/board/list?boardCategory=" + boardCategory;
+    }
 }

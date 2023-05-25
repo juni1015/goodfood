@@ -165,4 +165,8 @@ public class BoardService {
             boardRepository.saveFile(boardFileDTO);
         }
     }
+
+    public void dataSetting(BoardDTO boardDTO) {
+        boardRepository.save(boardDTO);
+    }
 }
