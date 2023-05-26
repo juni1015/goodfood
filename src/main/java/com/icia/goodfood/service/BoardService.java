@@ -181,4 +181,24 @@ public class BoardService {
     public BoardFileDTO findFile(Long id) {
         return boardRepository.findFile(id);
     }
+
+    public ChoiceDTO findChoice(ChoiceDTO choiceDTO) {
+        return boardRepository.findChoice(choiceDTO);
+    }
+
+    public void choice(ChoiceDTO choiceDTO) {
+        boardRepository.choice(choiceDTO);
+    }
+
+    public void unChoice(ChoiceDTO choiceDTO) {
+        boardRepository.unChoice(choiceDTO);
+    }
+
+    public void choiceUp(Long boardId) {
+        boardRepository.choiceUp(boardId);
+    }
+
+    public void choiceDown(Long boardId) {
+        boardRepository.choiceDown(boardId);
+    }
 }

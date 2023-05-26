@@ -2,6 +2,7 @@ package com.icia.goodfood.repository;
 
 import com.icia.goodfood.dto.BoardDTO;
 import com.icia.goodfood.dto.BoardFileDTO;
+import com.icia.goodfood.dto.ChoiceDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -67,5 +68,25 @@ public class BoardRepository {
 
     public BoardFileDTO findFile(Long boardId) {
         return sql.selectOne("Board.findFile", boardId);
+    }
+
+    public ChoiceDTO findChoice(ChoiceDTO choiceDTO) {
+        return sql.selectOne("Board.findChoice", choiceDTO);
+    }
+
+    public void choice(ChoiceDTO choiceDTO) {
+        sql.insert("Board.choice", choiceDTO);
+    }
+
+    public void unChoice(ChoiceDTO choiceDTO) {
+        sql.delete("Board.unChoice", choiceDTO);
+    }
+
+    public void choiceUp(Long id) {
+        sql.update("Board.choiceUp", id);
+    }
+
+    public void choiceDown(Long id) {
+        sql.update("Board.choiceDown", id);
     }
 }

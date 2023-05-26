@@ -80,6 +80,26 @@
         select * from goodfood_boardfile_table where boardId = #{boardId}
     </select>
 
+    <select id="findChoice" parameterType="choice" resultType="choice">
+        select * from goodfood_boardchoice_table where boardId = #{boardId} and memberId = #{memberId}
+    </select>
+
+    <insert id="choice" parameterType="choice">
+        insert into goodfood_boardchoice_table(boardId, memberId) values (#{boardId}, #{memberId})
+    </insert>
+
+    <delete id="unChoice" parameterType="choice">
+        delete from goodfood_boardchoice_table where boardId = #{boardId} and memberId = #{memberId}
+    </delete>
+
+    <update id="choiceUp" parameterType="Long">
+        update goodfood_board_table set boardStoreChoice = boardStoreChoice + 1 where id = #{id}
+    </update>
+
+    <update id="choiceDown" parameterType="Long">
+        update goodfood_board_table set boardStoreChoice = boardStoreChoice - 1 where id = #{id}
+    </update>
+
 </mapper>
 
 

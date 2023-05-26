@@ -97,6 +97,7 @@ public class BoardController {
                            @RequestParam(value = "boardCategory", required = false, defaultValue = "0") int boardCategory,
                            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                            @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                           HttpSession session,
                            Model model) {
         boardService.boardHitsUp(id);
         BoardDTO boardDTO = boardService.findById(id);
@@ -109,6 +110,41 @@ public class BoardController {
             BoardFileDTO boardFileDTO = boardService.findFile(id);
             model.addAttribute("boardFile", boardFileDTO);
         }
+        // 찜 여부 확인
+        // 세션에 들어있는 로그인된 id 가져오기
+        Long loginId = (Long) session.getAttribute("loginId");
+        ChoiceDTO choiceDTO = new ChoiceDTO();
+        choiceDTO.setBoardId(id);
+        choiceDTO.setMemberId(loginId);
+        ChoiceDTO choiceDTO1 = boardService.findChoice(choiceDTO);
+        System.out.println("choiceDTO1 = " + choiceDTO1);
+        if (choiceDTO1 != null) {
+            model.addAttribute("choice", 1);
+        } else {
+            model.addAttribute("choice", 0);
+        }
         return "boardPages/boardDetail";
+    }
+
+    @PostMapping("/choice")
+    public ResponseEntity choiceUp(@RequestParam("boardId") Long boardId,
+                                 @RequestParam("memberId") Long memberId) {
+        ChoiceDTO choiceDTO = new ChoiceDTO();
+        choiceDTO.setBoardId(boardId);
+        choiceDTO.setMemberId(memberId);
+        boardService.choice(choiceDTO);
+        boardService.choiceUp(boardId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/unChoice")
+    public ResponseEntity choiceDown(@RequestParam("boardId") Long boardId,
+                                     @RequestParam("memberId") Long memberId) {
+        ChoiceDTO choiceDTO = new ChoiceDTO();
+        choiceDTO.setBoardId(boardId);
+        choiceDTO.setMemberId(memberId);
+        boardService.unChoice(choiceDTO);
+        boardService.choiceDown(boardId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
