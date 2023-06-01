@@ -32,6 +32,21 @@
         #star, #un-star {
             cursor: pointer;
         }
+
+        .rounded-circle {
+            width: 200px; /* 원하는 크기로 설정 */
+            height: 200px;
+            border-radius: 50%; /* border를 원형으로 만듦 */
+            overflow: hidden; /* 넘치는 부분을 숨김 */
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .rounded-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 이미지가 div 영역에 꽉 차도록 설정 */
+        }
     </style>
 </head>
 <body>
@@ -103,6 +118,24 @@
                     <input type="button" class="btn btn-dark" value="삭제" onclick="delete_check()">
                 </c:if>
             </div>
+        </div>
+    </div>
+    <div class="container" style="background-color: gray">
+        <div class="row">
+            <form action="">
+                <div class="col-2">
+                    <div class="rounded-circle">
+                        <%--               src="${pageContext.request.contextPath} : 현재 돌고있는 서버에 접근한다--%>
+                        <img src="${pageContext.request.contextPath}/upload/${memberProfile.storedFileName}" alt="" width="300" height="300">
+                    </div>
+                </div>
+                <div class="col-8">
+                    <textarea name="boardContents" id="board-contents" placeholder="내용"></textarea>
+                </div>
+                <div class="col-2">
+                    <input type="submit" value="작성">
+                </div>
+            </form>
         </div>
     </div>
 </div>

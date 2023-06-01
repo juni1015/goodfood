@@ -2,6 +2,7 @@ package com.icia.goodfood.controller;
 
 import com.icia.goodfood.dto.*;
 import com.icia.goodfood.service.BoardService;
+import com.icia.goodfood.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import java.util.List;
 public class BoardController {
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private MemberService memberService;
 
     @GetMapping("/list")
     public String list(@RequestParam(value = "boardCategory", required = false, defaultValue = "0") int boardCategory,
@@ -123,6 +126,18 @@ public class BoardController {
         } else {
             model.addAttribute("choice", 0);
         }
+        // 리뷰작성자 정보 및 이미지 가져오기
+        MemberDTO memberDTO = memberService.findById(loginId);
+        model.addAttribute("member", memberDTO);
+        MemberProfileDTO memberProfileDTO = new MemberProfileDTO();
+        if (memberDTO.getProfileAttached() == 1) {
+            memberProfileDTO = memberService.findProfile(loginId);
+        } else {
+            memberProfileDTO.setMemberId(memberDTO.getId());
+            memberProfileDTO.setStoredFileName("person_nonimg.png");
+            memberProfileDTO.setOriginalFileName("person_nonimg.png");
+        }
+        model.addAttribute("memberProfile", memberProfileDTO);
         return "boardPages/boardDetail";
     }
 
