@@ -128,7 +128,7 @@ public class BoardController {
 
     @PostMapping("/choice")
     public ResponseEntity choiceUp(@RequestParam("boardId") Long boardId,
-                                 @RequestParam("memberId") Long memberId) {
+                                   @RequestParam("memberId") Long memberId) {
         ChoiceDTO choiceDTO = new ChoiceDTO();
         choiceDTO.setBoardId(boardId);
         choiceDTO.setMemberId(memberId);
@@ -146,5 +146,44 @@ public class BoardController {
         boardService.unChoice(choiceDTO);
         boardService.choiceDown(boardId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/update")
+    public String update(@RequestParam("id") Long id,
+                         @RequestParam(value = "boardCategory", required = false, defaultValue = "0") int boardCategory,
+                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                         Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        model.addAttribute("boardCategory", boardCategory);
+        model.addAttribute("page", page);
+        model.addAttribute("q", q);
+        //파일 있으면 찾아오기
+        if (boardDTO.getFileAttached() == 1) {
+            BoardFileDTO boardFileDTO = boardService.findFile(id);
+            model.addAttribute("boardFile", boardFileDTO);
+        }
+        return "boardPages/boardUpdate";
+    }
+
+    @PostMapping("/update")
+    public String update(@RequestParam("id") Long id,
+                         @RequestParam(value = "boardCategory", required = false, defaultValue = "0") int boardCategory,
+                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                         @ModelAttribute BoardDTO boardDTO) {
+        boardDTO.setId(id);
+        boardService.update(boardDTO);
+        return "redirect:/board/detail?id=" + id + "&boardCategory=" + boardCategory + "&page=" + page + "&q=" + q;
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id,
+                         @RequestParam(value = "boardCategory", required = false, defaultValue = "0") int boardCategory,
+                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         @RequestParam(value = "q", required = false, defaultValue = "") String q) {
+        boardService.delete(id);
+        return "redirect:/board/list?boardCategory=" + boardCategory + "&page=" + page + "&q=" + q;
     }
 }

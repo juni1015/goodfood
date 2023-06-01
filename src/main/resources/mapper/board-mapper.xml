@@ -14,17 +14,17 @@
 
     <select id="searchList" parameterType="java.util.HashMap" resultType="board">
         select * from goodfood_board_table
-                 where boardStoreName like concat('%', #{q}, '%') or
-                       boardStoreAddress like concat('%', #{q}, '%') or
-                       boardStoreKind like concat('%', #{q}, '%')
-                 order by id desc limit #{start}, #{limit}
+        where boardStoreName like concat('%', #{q}, '%') or
+            boardStoreAddress like concat('%', #{q}, '%') or
+            boardStoreKind like concat('%', #{q}, '%')
+        order by id desc limit #{start}, #{limit}
     </select>
 
     <select id="searchCount" parameterType="String" resultType="Integer">
         select count(id) from goodfood_board_table
-                         where boardStoreName like concat('%', #{q}, '%') or
-                               boardStoreAddress like concat('%', #{q}, '%') or
-                               boardStoreKind like concat('%', #{q}, '%')
+        where boardStoreName like concat('%', #{q}, '%') or
+            boardStoreAddress like concat('%', #{q}, '%') or
+            boardStoreKind like concat('%', #{q}, '%')
     </select>
 
     <select id="categoryList" parameterType="java.util.HashMap" resultType="board">
@@ -38,24 +38,24 @@
 
     <select id="categorySearchList" parameterType="java.util.HashMap" resultType="board">
         select * from goodfood_board_table
-                where boardCategory = #{boardCategory} and
-                      (boardStoreName like concat('%', #{q}, '%') or
-                       boardStoreAddress like concat('%', #{q}, '%') or
-                       boardStoreKind like concat('%', #{q}, '%'))
-                order by id desc limit #{start}, #{limit}
+        where boardCategory = #{boardCategory} and
+            (boardStoreName like concat('%', #{q}, '%') or
+             boardStoreAddress like concat('%', #{q}, '%') or
+             boardStoreKind like concat('%', #{q}, '%'))
+        order by id desc limit #{start}, #{limit}
     </select>
 
     <select id="categorySearchCount" parameterType="java.util.HashMap" resultType="Integer">
         select count(id) from goodfood_board_table
-                         where boardCategory = #{boardCategory} and
-                               (boardStoreName like concat('%', #{q}, '%') or
-                                boardStoreAddress like concat('%', #{q}, '%') or
-                                boardStoreKind like concat('%', #{q}, '%'))
+        where boardCategory = #{boardCategory} and
+            (boardStoreName like concat('%', #{q}, '%') or
+             boardStoreAddress like concat('%', #{q}, '%') or
+             boardStoreKind like concat('%', #{q}, '%'))
     </select>
 
     <select id="doubleCheck" parameterType="board" resultType="board">
         select * from goodfood_board_table
-                 where boardStoreName = #{boardStoreName} and boardStoreAddress = #{boardStoreAddress}
+        where boardStoreName = #{boardStoreName} and boardStoreAddress = #{boardStoreAddress}
     </select>
 
     <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
@@ -99,6 +99,19 @@
     <update id="choiceDown" parameterType="Long">
         update goodfood_board_table set boardStoreChoice = boardStoreChoice - 1 where id = #{id}
     </update>
+
+    <update id="update" parameterType="board">
+        update goodfood_board_table
+        set boardCategory = #{boardCategory}, boardStoreName = #{boardStoreName},
+            boardStoreAddress = #{boardStoreAddress}, boardStoreKind = #{boardStoreKind},
+            boardStoreNumber = #{boardStoreNumber}, boardStoreTime = #{boardStoreTime},
+            boardStoreHomepage = #{boardStoreHomepage}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete from goodfood_board_table where id = #{id}
+    </delete>
 
 </mapper>
 
