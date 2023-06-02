@@ -34,18 +34,29 @@
         }
 
         .rounded-circle {
-            width: 200px; /* 원하는 크기로 설정 */
-            height: 200px;
+            width: 30px; /* 원하는 크기로 설정 */
+            height: 30px;
             border-radius: 50%; /* border를 원형으로 만듦 */
             overflow: hidden; /* 넘치는 부분을 숨김 */
-            margin-bottom: 30px;
-            margin-top: 20px;
+            /*margin-bottom: 30px;*/
+            /*margin-top: 10px;*/
+            margin: 0 auto;
         }
 
         .rounded-circle img {
             width: 100%;
             height: 100%;
             object-fit: cover; /* 이미지가 div 영역에 꽉 차도록 설정 */
+        }
+        #review-contents {
+            width: 100%;
+            height: 50px;
+        }
+        #review-button {
+            width: 100%;
+        }
+        .review-container {
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -120,23 +131,23 @@
             </div>
         </div>
     </div>
-    <div class="container" style="background-color: gray">
-        <div class="row">
-            <form action="">
-                <div class="col-2">
+    <div class="container review-container">
+        <form action="">
+            <div class="row">
+                <div class="col-1">
                     <div class="rounded-circle">
                         <%--               src="${pageContext.request.contextPath} : 현재 돌고있는 서버에 접근한다--%>
-                        <img src="${pageContext.request.contextPath}/upload/${memberProfile.storedFileName}" alt="" width="300" height="300">
+                        <img src="${pageContext.request.contextPath}/upload/${memberProfile.storedFileName}" alt="">
                     </div>
                 </div>
-                <div class="col-8">
-                    <textarea name="boardContents" id="board-contents" placeholder="내용"></textarea>
+                <div class="col-9">
+                    <textarea name="boardContents" id="review-contents" placeholder="내용"></textarea>
                 </div>
                 <div class="col-2">
-                    <input type="submit" value="작성">
+                    <input type="submit" value="작성" id="review-button">
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 <%@include file="../component/footer.jsp"%>
