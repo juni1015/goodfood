@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Review">
+    <insert id="save" parameterType="review">
+        insert into goodfood_review_table(reviewContents, boardId, memberId)
+        values (#{reviewContents}, #{boardId}, #{memberId})
+    </insert>
+
+    <select id="findAll" parameterType="Long" resultType="review">
+        select * from goodfood_review_table where boardId = #{boardId}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

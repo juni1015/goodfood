@@ -8,5 +8,6 @@
         <typeAlias type="com.icia.goodfood.dto.BoardDTO" alias="board" />
         <typeAlias type="com.icia.goodfood.dto.BoardFileDTO" alias="boardFile" />
         <typeAlias type="com.icia.goodfood.dto.ChoiceDTO" alias="choice" />
+        <typeAlias type="com.icia.goodfood.dto.ReviewDTO" alias="review" />
     </typeAliases>
 </configuration>
