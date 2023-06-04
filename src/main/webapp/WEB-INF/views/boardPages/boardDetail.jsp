@@ -166,6 +166,39 @@
             </form>
         </c:if>
     </div>
+    <div id="review-list">
+        <c:choose>
+            <c:when test="${reviewList == null}">
+                <h2>작성된 리뷰 없음</h2>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${reviewList}" var="review">
+                    <div class="row">
+                        <c:forEach items="${memberProfileList}" var="profile">
+                            <c:if test="${profile.memberId == review.memberId}">
+                                <div class="col-1">
+                                    <div class="rounded-circle">
+                                        <img src="${pageContext.request.contextPath}/upload/${profile.storedFileName}"
+                                             alt="">
+                                    </div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                        <c:forEach items="${memberList}" var="member">
+                            <c:if test="${review.memberId == member.id}">
+                                <div class="col-3">
+                                    <p>${member.memberNickname}</p>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                        <div class="col-8">
+                            <p>${review.reviewContents}</p>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
+    </div>
 </div>
 <%@include file="../component/footer.jsp" %>
 </body>
