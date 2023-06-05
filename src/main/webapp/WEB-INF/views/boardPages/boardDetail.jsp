@@ -169,7 +169,7 @@
     <div id="review-list">
         <c:choose>
             <c:when test="${reviewList == null}">
-                <h2>작성된 리뷰 없음</h2>
+                <h5>작성된 리뷰 없음</h5>
             </c:when>
             <c:otherwise>
                 <c:forEach items="${reviewList}" var="review">
@@ -178,18 +178,17 @@
                             <c:if test="${profile.memberId == review.memberId}">
                                 <div class="col-1">
                                     <div class="rounded-circle">
-                                        <img src="${pageContext.request.contextPath}/upload/${profile.storedFileName}"
-                                             alt="">
+                                        <img src="${pageContext.request.contextPath}/upload/${profile.storedFileName}" alt="">
                                     </div>
                                 </div>
                             </c:if>
-                        </c:forEach>
-                        <c:forEach items="${memberList}" var="member">
-                            <c:if test="${review.memberId == member.id}">
-                                <div class="col-3">
-                                    <p>${member.memberNickname}</p>
-                                </div>
-                            </c:if>
+                            <c:forEach items="${memberList}" var="member">
+                                <c:if test="${review.memberId == member.id}">
+                                    <div class="col-3">
+                                        <p>${member.memberNickname}</p>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
                         </c:forEach>
                         <div class="col-8">
                             <p>${review.reviewContents}</p>

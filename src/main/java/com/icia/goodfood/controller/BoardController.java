@@ -156,7 +156,7 @@ public class BoardController {
             for (ReviewDTO reviewDTO : reviewDTOList) {
                 memberDTO = memberService.findById(reviewDTO.getMemberId());
                 if (memberDTO.getProfileAttached() == 1) {
-                    memberProfileDTO = memberService.findProfile(loginId);
+                    memberProfileDTO = memberService.findProfile(reviewDTO.getMemberId());
                 } else {
                     memberProfileDTO.setMemberId(memberDTO.getId());
                     memberProfileDTO.setStoredFileName("person_nonimg.png");
